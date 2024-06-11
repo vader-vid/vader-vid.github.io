@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
@@ -29,7 +30,61 @@
   <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <meta property="og:image:width" content="1600" />
   <meta property="og:image:height" content="900" />
+  
+  <style>
+    .carousel-control-prev,
+    .carousel-control-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 5%;
+      align-items: center;
+      justify-content: center;
+      height: 100%; /* Ensure the buttons take the full height of the container */
+    }
 
+    .video-wrapper {
+      display: flex;
+      justify-content: center; /* Center the video containers horizontally */
+      align-items: center; /* Center the video containers vertically */
+      position: relative;
+      width: 80%; /* Adjust the width to make the whole container smaller */
+      margin: auto; /* Center the container */
+      gap: 1%; /* Adjust the gap between videos */
+      border: none; /* Remove any border */
+      padding: 0; /* Remove any padding */
+      background: none; /* Remove any background */
+    }
+
+    .video-container {
+      position: relative;
+      width: 50%; /* Adjust the width of each video container */
+      overflow: hidden; /* Ensure the video doesn't overflow the container */
+      border-radius: 10px; /* Apply rounded corners */
+    }
+
+    .video-container video {
+      width: 100%;
+      height: auto;
+      border-radius: 10px; /* Ensure the video itself has rounded corners */
+      border: 1px solid #ccc; /* Add a border around the video */
+    }
+
+    .carousel-caption {
+      position: relative;
+      left: 0;
+      color: black;
+      margin-top: 10px; /* Adjust margin as needed */
+      text-align: center;
+  }
+
+  .carousel-inner {
+    overflow: hidden; /* Ensure no overflow is visible during transitions */
+    margin: 0; /* Remove any margin */
+    padding: 0; /* Remove any padding */
+  }
+
+  </style>
 </head>
 <body>
   
@@ -43,6 +98,7 @@
               <span class="author-block">
                 <a href="https://mihirp1998.github.io">Mihir Prabhudesai</a><sup>*</sup>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="https://russellmendonca.github.io/">Russell Mendonca</a><sup>*</sup>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="">Zheyang Qin</a><sup>*</sup>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="https://www.cs.cmu.edu/~katef/">Katerina Fragkiadaki</a><sup></sup>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="https://www.cs.cmu.edu/~dpathak/">Deepak Pathak</a><sup></sup>
                 <br /><sup></sup>Carnegie Mellon University<br />
@@ -69,10 +125,10 @@
     <div class="image-container">
       <div class="flipper">
         <video class="front" autoplay loop muted>
-          <source src="videos/hps_ood/ours_8_3.mp4" type="video/mp4">
+          <source src="videos/row1/9_0_0001.mp4" type="video/mp4">
         </video>
         <video class="back" autoplay loop muted>
-          <source src="videos/other_ood/ours_41.mp4" type="video/mp4">
+          <source src="videos/row1/9_0_0002.mp4" type="video/mp4">
         </video>
       </div>
     </div>
@@ -80,10 +136,10 @@
     <div class="image-container">
       <div class="flipper">
         <video class="front" autoplay loop muted>
-          <source src="videos/other_ood/ours_5.mp4" type="video/mp4">
+          <source src="videos/row1/1_1_0001.mp4" type="video/mp4">
         </video>
         <video class="back" autoplay loop muted>
-          <source src="videos/hps_in_dist/ours_3_3.mp4" type="video/mp4">
+          <source src="videos/row1/0_1_0002.mp4" type="video/mp4">
         </video>
       </div>
     </div>
@@ -91,10 +147,10 @@
     <div class="image-container">
       <div class="flipper">
         <video class="front" autoplay loop muted>
-          <source src="videos/hps_in_dist/ours_1_3.mp4" type="video/mp4">
+          <source src="videos/row4/5_1_0002.mp4" type="video/mp4">
         </video>
         <video class="back" autoplay loop muted>
-          <source src="videos/other_ood/ours_333.mp4" type="video/mp4">
+          <source src="videos/row4/7_1_0002.mp4" type="video/mp4">
         </video>
       </div>
     </div>
@@ -102,10 +158,10 @@
     <div class="image-container">
       <div class="flipper">
         <video class="front" autoplay loop muted>
-          <source src="videos/other_ood/ours_15.mp4" type="video/mp4">
+          <source src="videos/row4/3_0_0002.mp4" type="video/mp4">
         </video>
         <video class="back" autoplay loop muted>
-          <source src="videos/hps_in_dist/ours_0_3.mp4" type="video/mp4">
+          <source src="videos/row4/11_1_0002.mp4" type="video/mp4">
         </video>
       </div>
     </div>
@@ -113,10 +169,10 @@
     <div class="image-container">
       <div class="flipper">
         <video class="front" autoplay loop muted>
-          <source src="videos/other_ood/ours_19.mp4" type="video/mp4">
+          <source src="videos/row4/14_0_0002.mp4" type="video/mp4">
         </video>
         <video class="back" autoplay loop muted>
-          <source src="videos/hps_ood/ours_0_1.mp4" type="video/mp4">
+          <source src="videos/row4/9_0_0001.mp4" type="video/mp4">
         </video>
       </div>
     </div>
@@ -124,10 +180,10 @@
     <div class="image-container">
       <div class="flipper">
         <video class="front" autoplay loop muted>
-          <source src="videos/other_ood/ours_27.mp4" type="video/mp4">
+          <source src="videos/row2/6_1_0001.mp4" type="video/mp4">
         </video>
         <video class="back" autoplay loop muted>
-          <source src="videos/hps_ood/ours_18_4.mp4" type="video/mp4">
+          <source src="videos/row2/2_1_0004.mp4" type="video/mp4">
         </video>
       </div>
     </div>
@@ -135,10 +191,10 @@
     <div class="image-container">
       <div class="flipper">
         <video class="front" autoplay loop muted>
-          <source src="videos/other_ood/ours_33.mp4" type="video/mp4">
+          <source src="videos/row2/1_0_0001.mp4" type="video/mp4">
         </video>
         <video class="back" autoplay loop muted>
-          <source src="videos/hps_in_dist/ours_3_2.mp4" type="video/mp4">
+          <source src="videos/row2/0_1_0003.mp4" type="video/mp4">
         </video>
       </div>
     </div>
@@ -146,10 +202,10 @@
     <div class="image-container">
       <div class="flipper">
         <video class="front" autoplay loop muted>
-          <source src="videos/hps_ood/ours_2_3.mp4" type="video/mp4">
+          <source src="videos/row4/14_1_0001.mp4" type="video/mp4">
         </video>
         <video class="back" autoplay loop muted>
-          <source src="videos/hps_in_dist/ours_20_4.mp4" type="video/mp4">
+          <source src="videos/row4/12_0_0002.mp4" type="video/mp4">
         </video>
       </div>
     </div>
@@ -157,10 +213,10 @@
     <div class="image-container">
       <div class="flipper">
         <video class="front" autoplay loop muted>
-          <source src="videos/other_ood/ours_44.mp4" type="video/mp4">
+          <source src="videos/row5/3_1_0002.mp4" type="video/mp4">
         </video>
         <video class="back" autoplay loop muted>
-          <source src="videos/hps_ood/ours_9_2.mp4" type="video/mp4">
+          <source src="videos/row5/7_0_0003.mp4" type="video/mp4">
         </video>
       </div>
     </div>
@@ -168,10 +224,10 @@
     <div class="image-container">
       <div class="flipper">
         <video class="front" autoplay loop muted>
-          <source src="videos/hps_in_dist/ours_20_2.mp4" type="video/mp4">
+          <source src="videos/row3/1_0_0002.mp4" type="video/mp4">
         </video>
         <video class="back" autoplay loop muted>
-          <source src="videos/other_ood/ours_108.mp4" type="video/mp4">
+          <source src="videos/row3/5_1_0001.mp4" type="video/mp4">
         </video>
       </div>
     </div>
@@ -179,10 +235,10 @@
     <div class="image-container">
       <div class="flipper">
         <video class="front" autoplay loop muted>
-          <source src="videos/hps_ood/ours_14_2.mp4" type="video/mp4">
+          <source src="videos/row3/3_0_0002.mp4" type="video/mp4">
         </video>
         <video class="back" autoplay loop muted>
-          <source src="videos/hps_in_dist/ours_1_1.mp4" type="video/mp4">
+          <source src="videos/row3/2_1_0004.mp4" type="video/mp4">
         </video>
       </div>
     </div>
@@ -190,10 +246,10 @@
     <div class="image-container">
       <div class="flipper">
         <video class="front" autoplay loop muted>
-          <source src="videos/hps_in_dist/ours_15_1.mp4" type="video/mp4">
+          <source src="videos/row5/9_1_0001.mp4" type="video/mp4">
         </video>
         <video class="back" autoplay loop muted>
-          <source src="videos/hps_ood/ours_65_2.mp4" type="video/mp4">
+          <source src="videos/row5/12_1_0002.mp4" type="video/mp4">
         </video>
       </div>
     </div>
@@ -224,417 +280,254 @@
   </section>
 
 
-<section class="section" style="width: 85%; margin: 0 auto;">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- ######################## -->
+  <!-- Aesthetic and HPS section -->
+  <div class="container">
     <div class="container">
       <div class="columns is-centered">
         <div class="column is-full-width">
-          <h3 class="title pt-5 pb-2 has-text-centered" style="text-align: center; padding-bottom: 10px;"><bold>Aesthetic Reward, in-distribution prompts</bold></h3>
-          <div class="columns is-centered has-text-centered">
-            <div class="column is-two-thirds ">
-            <div class="content has-text-justified">
-          <p style="text-align: center; font-size: 22px"> We compare VADER against its base model ModelScope and prior alignment approaches, including DDPO and DiffusionDPO, using the aesthetics reward, for in-distribution prompts.</p>
-        </div>
-        </div>
-        </div>
-          <tr>
-            <td>
-              <div class="columns is-centered has-text-centered" style="align-items: center;">
-                <div class="column is-size-4">"A man smiles as he stirs his food in the pot"</div> <!-- Adjusted for vertical centering -->
-                <div class="column">
-                  <div class="pb-2 is-size-6">VADER (Ours)</div>
-                  <video class="center" playsinline autoplay loop muted width="100%" style="border-radius:10px; max-height: 100%;">
-                    <source src="videos/aes_in_dist/likely-smoke-401/0_dataset_A man smiles as he stirs his food in the pot._3.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
-                <div class="column">
-                  <div class="pb-2 is-size-6">ModelScope</div>
-                  <video class="center" playsinline autoplay loop muted width="100%" style="border-radius:10px; max-height: 100%;">
-                    <source src="videos/aes_in_dist/jumping-dawn-405/0_dataset_A man smiles as he stirs his food in the pot._3.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
-                <div class="column">
-                  <div class="pb-2 is-size-6">DDPO</div>
-                  <video class="center" playsinline autoplay loop muted width="100%" style="border-radius:10px; max-height: 100%;">
-                    <source src="videos/aes_in_dist/apple-meringue-433/0_dataset_A man smiles as he stirs his food in the pot._3.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
-                <div class="column">
-                  <div class="pb-2 is-size-6">DPO</div>
-                  <video class="center" playsinline autoplay loop muted width="100%" style="border-radius:10px; max-height: 100%;">
-                    <source src="videos/aes_in_dist/strawberry-pie-434/0_dataset_A man smiles as he stirs his food in the pot._3.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
-              </div>
-
-              <div class="columns is-centered has-text-centered" style="align-items: center;">
-                <div class="column is-size-4">"A woman in a purple top pulling food out of an oven"</div> 
-                <div class="column">
-                  <div class="pb-2 is-size-6">VADER (Ours)</div>
-                  <video class="center" playsinline autoplay loop muted width="100%" style="border-radius:10px; max-height: 100%;">
-                    <source src="videos/aes_in_dist/likely-smoke-401/2_dataset_A woman in a purple top pulling food out of a oven._1.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                  </video>
-                </div>   
-                <div class="column">
-                  <div class="pb-2 is-size-6">ModelScope</div>
-                  <video class="center" playsinline autoplay loop muted width="100%" style="border-radius:10px; max-height: 100%;">
-                    <source src="videos/aes_in_dist/jumping-dawn-405/2_dataset_A woman in a purple top pulling food out of a oven._1.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
-                <div class="column">
-                  <div class="pb-2 is-size-6">DDPO</div>
-                  <video class="center" playsinline autoplay loop muted width="100%" style="border-radius:10px; max-height: 100%;">
-                    <source src="videos/aes_in_dist/apple-meringue-433/2_dataset_A woman in a purple top pulling food out of a oven._1.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
-                <div class="column">
-                  <div class="pb-2 is-size-6">DPO</div>
-                  <video class="center" playsinline autoplay loop muted width="100%" style="border-radius:10px; max-height: 100%;">
-                    <source src="videos/aes_in_dist/strawberry-pie-434/2_dataset_A woman in a purple top pulling food out of a oven._1.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
-              </div>
-              
-              <div class="columns is-centered has-text-centered" style="align-items: center;">
-                <div class="column is-size-4">"At night on a street with a group of bicycle riders riding down the road together"</div>
-                <div class="column">
-                  <div class="pb-2 is-size-6">VADER (Ours)</div>
-                  <video class="center" playsinline autoplay loop muted width="100%" style="border-radius:10px; max-height: 100%;">
-                    <source src="videos/aes_in_dist/likely-smoke-401/1_dataset_At night on a street with a group of a bicycle riders riding down the road together._1.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                  </video>
-                </div>         
-                <div class="column">
-                  <div class="pb-2 is-size-6">ModelScope</div>
-                  <video class="center" playsinline autoplay loop muted width="100%" style="border-radius:10px; max-height: 100%;">
-                    <source src="videos/aes_in_dist/jumping-dawn-405/1_dataset_At night on a street with a group of a bicycle riders riding down the road together._1.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
-                <div class="column">
-                  <div class="pb-2 is-size-6">DDPO</div>
-                  <video class="center" playsinline autoplay loop muted width="100%" style="border-radius:10px; max-height: 100%;">
-                    <source src="videos/aes_in_dist/apple-meringue-433/1_dataset_At night on a street with a group of a bicycle riders riding down the road together._1.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
-                <div class="column">
-                  <div class="pb-2 is-size-6">DPO</div>
-                  <video class="center" playsinline autoplay loop muted width="100%" style="border-radius:10px; max-height: 100%;">
-                    <source src="videos/aes_in_dist/strawberry-pie-434/1_dataset_At night on a street with a group of a bicycle riders riding down the road together._1.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
-              </div>
-              
-          <div style="text-align: center; padding-top: 20px;"> <!-- This div centers the content and adds padding at the top -->
-            <h2 class="title has-text-centered is-size-4" style="background-color: #f2f2f2; padding: 10px; border-radius: 5px; display: inline-block;">
-              <a href="aes_in_dist.html" style="text-decoration: none; color: blue;">Click here for More Results</a>
-            </h2>
-          </div>
-</td>
-</tr>
-</div> 
-</div>
-</div>
-</section>
-
-<section class="section" style="width: 85%; margin: 0 auto;">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h3 class="title pt-5 pb-2 has-text-centered" style="text-align: center; padding-bottom: 10px;"><bold>HPS Reward, in-distribution prompts</bold></h3>
-        <div class="columns is-centered has-text-centered">
-          <div class="column is-two-thirds ">
-            <div class="content has-text-justified">
-              <p style="text-align: center; font-size: 22px"> We compare VADER against its base model ModelScope and prior alignment approaches, including DDPO and DiffusionDPO, using the HPS reward, for in-distribution prompts.</p>
-            </div>
-          </div>
-        </div>
-        <div class="columns is-centered has-text-centered" style="align-items: center;">
-          <div class="column is-size-4" >"some people holding umbrellas and standing by a car in the rain"</div>
-          <div class="column">
-            <div class="pb-2 is-size-6">VADER (Ours)</div>
-            <video class="center" playsinline autoplay loop muted width="100%" style="border-radius:10px; max-height: 100%;">
-              <source src="videos/hps_in_dist/ours_3_2.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="column">
-            <div class="pb-2 is-size-6">ModelScope</div>
-            <video class="center" playsinline autoplay loop muted width="100%" style="border-radius:10px; max-height: 100%;">
-              <source src="videos/hps_in_dist/ms_3_2.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="column">
-            <div class="pb-2 is-size-6">DDPO</div>
-            <video class="center" playsinline autoplay loop muted width="100%" style="border-radius:10px; max-height: 100%;">
-              <source src="videos/hps_in_dist/ddpo_3_2.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="column">
-            <div class="pb-2 is-size-6">DPO</div>
-            <video class="center" playsinline autoplay loop muted width="100%" style="border-radius:10px; max-height: 100%;">
-              <source src="videos/hps_in_dist/dpo_3_2.mp4" type="video/mp4">
-            </video>
-          </div>
-        </div>
-        <div class="columns is-centered has-text-centered" style="align-items: center;">
-          <div class="column is-size-4" >"A woman eating fresh vegetables from a bowl"</div>
-          <div class="column">
-            <div class="pb-2 is-size-6"> VADER (Ours) </div>
-            <video class="center" playsinline autoplay loop muted width="100%" style="border-radius:10px; max-height: 100%;">
-              <source src="videos/hps_in_dist/ours_20_2.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="column">
-            <div class="pb-2 is-size-6"> ModelScope</div>
-            <video class="center" playsinline autoplay loop muted width="100%" style="border-radius:10px; max-height: 100%;">
-              <source src="videos/hps_in_dist/ms_20_2.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="column">
-            <div class="pb-2 is-size-6">DDPO</div>
-            <video class="center" playsinline autoplay loop muted width="100%" style="border-radius:10px; max-height: 100%;">
-              <source src="videos/hps_in_dist/ddpo_20_2.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="column">
-            <div class="pb-2 is-size-6">DPO</div>
-            <video class="center" playsinline autoplay loop muted width="100%" style="border-radius:10px; max-height: 100%;">
-              <source src="videos/hps_in_dist/dpo_20_2.mp4" type="video/mp4">
-            </video>
-          </div>
-        </div>
-        <div class="columns is-centered has-text-centered" style="align-items: center;">
-          <div class="column is-size-4" >"A man getting food ready while people watch."</div>
-          <div class="column">
-            <div class="pb-2 is-size-6">VADER (Ours)</div>
-            <video class="center" playsinline autoplay loop muted width="100%" style="border-radius:10px; max-height: 100%;">
-              <source src="videos/hps_in_dist/ours_3_3.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="column">
-            <div class="pb-2 is-size-6">ModelScope</div>
-            <video class="center" playsinline autoplay loop muted width="100%" style="border-radius:10px; max-height: 100%;">
-              <source src="videos/hps_in_dist/ms_3_3.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="column">
-            <div class="pb-2 is-size-6">DDPO</div>
-            <video class="center" playsinline autoplay loop muted width="100%" style="border-radius:10px; max-height: 100%;">
-              <source src="videos/hps_in_dist/ddpo_3_3.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="column">
-            <div class="pb-2 is-size-6">DPO</div>
-            <video class="center" playsinline autoplay loop muted width="100%" style="border-radius:10px; max-height: 100%;">
-              <source src="videos/hps_in_dist/dpo_3_3.mp4" type="video/mp4">
-            </video>
-          </div>
-        </div>
-        <div style="text-align: center; padding-top: 20px;">
-          <h2 class="title has-text-centered is-size-4" style="background-color: #f2f2f2; padding: 10px; border-radius: 5px; display: inline-block;">
-            <a href="hps_in_dist.html" style="text-decoration: none; color: blue;">Click here for More Results</a>
-          </h2>
+          <h3 class="title pt-5 pb-2 has-text-centered" style="text-align: center; padding-bottom: 10px;">
+            <strong>Aesthetic and HPS Reward</strong>
+          </h3>
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-
-
-
-<section class="section" style="width: 85%; margin: 0 auto;">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h3 class="title pt-5 pb-2 has-text-centered" style="text-align: center; padding-bottom: 10px;"><bold>Aesthetic Reward, OOD prompts</bold></h3>
-        <div class="columns is-centered has-text-centered">
-          <div class="column is-two-thirds ">
-          <div class="content has-text-justified">
-        <p style="text-align: center; font-size: 22px"> We compare VADER against its base model ModelScope and prior alignment approaches, including DDPO and DiffusionDPO, using the aesthetics reward, for OOD prompts.</p>
-      </div>
-      </div>
-      </div>
-        <tr>
-          <td>
-            
-            <div class="columns is-centered has-text-centered" style="align-items: center;">
-              <div class="column is-size-4" >"a dolphin riding a bike"</div>
-              <div class="column">
-                  <div class="pb-2 is-size-6">VADER (Ours)</div>
-                    <video class="center" playsinline autoplay loop muted width="100%" style="border-radius:10px; max-height: 100%;">
-                      <source src="videos/aes_ood/ours_0_4.mp4" type="video/mp4">
-                    </video>
-              </div>         
-              <div class="column">
-              <div class="pb-2 is-size-6">ModelScope</div>
-              <video class="center" playsinline autoplay loop muted  width="100%" style="border-radius:10px; max-height: 100%;">
-                <source src="videos/aes_ood/ms_0_4.mp4" type="video/mp4">
+    <div id="videoCarouselIndicators" class="carousel slide" data-ride="carousel" data-interval="5000">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="d-flex justify-content-center video-wrapper">
+            <div class="video-container">
+              <video class="d-block w-100" autoplay muted loop>
+                <source src="videos/row5/15_1_0001.mp4" type="video/mp4">
               </video>
-              </div>
-              <div class="column">
-              <div class="pb-2 is-size-6">DDPO</div>
-                  <video class="center" playsinline autoplay loop muted src="videos/aes_ood/ddpo_0_4.mp4" width="100%" style="border-radius:10px; max-height: 100%;"></video>
-              </div>
-              <div class="column">
-              <div class="pb-2 is-size-6">DPO</div>
-                  <video class="center" playsinline autoplay loop muted src="videos/aes_ood/dpo_0_4.mp4" width="100%" style="border-radius:10px; max-height: 100%;"></video>
-              </div> 
             </div>
-
-            <div class="columns is-centered has-text-centered" style="align-items: center;">
-              <div class="column is-size-4" >"a wolf washing the dishes"</div>
-              <div class="column">
-                  <div class="pb-2 is-size-6">VADER (Ours)</div>
-                  <video class="center" playsinline autoplay loop muted src="videos/aes_ood/ours_42_1.mp4" width="100%" style="border-radius:10px; max-height: 100%;"></video>
-              </div>
-              <div class="column">
-                  <div class="pb-2 is-size-6">ModelScope</div>
-                  <video class="center" playsinline autoplay loop muted src="videos/aes_ood/ms_42_1.mp4" width="100%" style="border-radius:10px; max-height: 100%;"></video>
-              </div>
-              <div class="column">
-                  <div class="pb-2 is-size-6">DDPO</div>
-                  <video class="center" playsinline autoplay loop muted src="videos/aes_ood/ddpo_42_1.mp4" width="100%" style="border-radius:10px; max-height: 100%;"></video>
-              </div>
-              <div class="column">
-                  <div class="pb-2 is-size-6">DPO</div>
-                  <video class="center" playsinline autoplay loop muted src="videos/aes_ood/dpo_42_1.mp4" width="100%" style="border-radius:10px; max-height: 100%;"></video>
-              </div>
+            <div class="video-container">
+              <video class="d-block w-100" autoplay muted loop>
+                <source src="videos/row5/13_0_0001.mp4" type="video/mp4">
+              </video>
+            </div>
+            <a class="carousel-control-prev" href="#videoCarouselIndicators" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#videoCarouselIndicators" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
           </div>
-
-            
-          <div class="columns is-centered has-text-centered" style="align-items: center;">
-            <div class="column is-size-4" >"a sheep playing chess"</div>
-            <div class="column">
-                <div class="pb-2 is-size-6">VADER (Ours)</div>
-                <video class="center" playsinline autoplay loop muted src="videos/aes_ood/ours_28_2.mp4" width="100%" style="border-radius:10px; max-height: 100%;"></video>
-            </div>
-            <div class="column">
-                <div class="pb-2 is-size-6">ModelScope</div>
-                <video class="center" playsinline autoplay loop muted src="videos/aes_ood/ms_28_2.mp4" width="100%" style="border-radius:10px; max-height: 100%;"></video>
-            </div>
-            <div class="column">
-                <div class="pb-2 is-size-6">DDPO</div>
-                <video class="center" playsinline autoplay loop muted src="videos/aes_ood/ddpo_28_2.mp4" width="100%" style="border-radius:10px; max-height: 100%;"></video>
-            </div>
-            <div class="column">
-                <div class="pb-2 is-size-6">DPO</div>
-                <video class="center" playsinline autoplay loop muted src="videos/aes_ood/dpo_28_2.mp4" width="100%" style="border-radius:10px; max-height: 100%;"></video>
-            </div>
+          <div class="carousel-caption">
+            Caption for video 1
+          </div>
         </div>
-           
-        <div style="text-align: center; padding-top: 20px;"> 
-          <h2 class="title has-text-centered is-size-4" style="background-color: #f2f2f2; padding: 10px; border-radius: 5px; display: inline-block;">
-            <a href="aes_ood.html" style="text-decoration: none; color: blue;">Click here for More Results</a>
-          </h2>
+        <div class="carousel-item">
+          <div class="d-flex justify-content-center video-wrapper">
+            <div class="video-container">
+              <video class="d-block w-100" autoplay muted loop>
+                <source src="videos/row5/3_1_0002.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="video-container">
+              <video class="d-block w-100" autoplay muted loop>
+                <source src="videos/row5/7_0_0003.mp4" type="video/mp4">
+              </video>
+            </div>
+            <a class="carousel-control-prev" href="#videoCarouselIndicators" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#videoCarouselIndicators" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+          <div class="carousel-caption">
+            Caption for video 2
+          </div>
         </div>
-</td>
-</tr>
-</div> 
-</div>
-</div>
-</section>
-
-
-<section class="section" style="width: 85%; margin: 0 auto;">
-<div class="container">
-  <div class="columns is-centered">
-    <div class="column is-full-width">
-      <h3 class="title pt-5 pb-2 has-text-centered" style="text-align: center; padding-bottom: 10px;"><bold>HPS Reward, OOD prompts</bold></h3>
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-two-thirds ">
-        <div class="content has-text-justified">
-      <p style="text-align: center; font-size: 22px"> We compare VADER against its base model ModelScope and prior alignment approaches, including DDPO and DiffusionDPO, using the HPS reward, for OOD prompts.</p>
-    </div>
-    </div>
-    </div>
-      <tr>
-        <td>
-          <div class="columns is-centered has-text-centered" style="align-items: center;">
-            <div class="column is-size-4" >"a chicken riding a bike"</div>
-            <div class="column">
-                <div class="pb-2 is-size-6">VADER (Ours)</div>
-                    <video class="center" playsinline autoplay loop muted src="videos/hps_ood/ours_0_1.mp4" width="100%" style="border-radius:10px; max-height: 100%;"></video>
-            </div>         
-            <div class="column">
-            <div class="pb-2 is-size-6">ModelScope</div>
-            <video class="center" playsinline autoplay loop muted src="videos/hps_ood/ms_0_1.mp4" width="100%" style="border-radius:10px; max-height: 100%;"></video>
-            </div>
-            <div class="column">
-            <div class="pb-2 is-size-6">DDPO</div>
-                <video class="center" playsinline autoplay loop muted src="videos/hps_ood/ddpo_0_1.mp4" width="100%" style="border-radius:10px; max-height: 100%;"></video>
-            </div>
-            <div class="column">
-            <div class="pb-2 is-size-6">DPO</div>
-                <video class="center" playsinline autoplay loop muted src="videos/hps_ood/dpo_0_1.mp4" width="100%" style="border-radius:10px; max-height: 100%;"></video>
-            </div> 
-          </div>
-
-          <div class="columns is-centered has-text-centered" style="align-items: center;">
-            <div class="column is-size-4" >"a monkey washing the dishes"</div>
-            <div class="column">
-                <div class="pb-2 is-size-6">VADER (Ours)</div>
-                    <video class="center" playsinline autoplay loop muted src="videos/hps_ood/ours_2_3.mp4" width="100%" style="border-radius:10px; max-height: 100%;"></video>
-            </div>         
-            <div class="column">
-            <div class="pb-2 is-size-6">ModelScope</div>
-            <video class="center" playsinline autoplay loop muted src="videos/hps_ood/ms_2_3.mp4" width="100%" style="border-radius:10px; max-height: 100%;"></video>
-            </div>
-            <div class="column">
-            <div class="pb-2 is-size-6">DDPO</div>
-                <video class="center" playsinline autoplay loop muted src="videos/hps_ood/ddpo_2_3.mp4" width="100%" style="border-radius:10px; max-height: 100%;"></video>
-            </div>
-            <div class="column">
-            <div class="pb-2 is-size-6">DPO</div>
-                <video class="center" playsinline autoplay loop muted src="videos/hps_ood/dpo_2_3.mp4" width="100%" style="border-radius:10px; max-height: 100%;"></video>
-            </div> 
-          </div>
-          
-
-          <div class="columns is-centered has-text-centered" style="align-items: center;">
-            <div class="column is-size-4" >"a deer playing chess"</div>
-            <div class="column">
-                <div class="pb-2 is-size-6">VADER (Ours)</div>
-                    <video class="center" playsinline autoplay loop muted src="videos/hps_ood/ours_6_4.mp4" width="100%" style="border-radius:10px; max-height: 100%;"></video>
-            </div>         
-            <div class="column">
-            <div class="pb-2 is-size-6">ModelScope</div>
-            <video class="center" playsinline autoplay loop muted src="videos/hps_ood/ms_6_4.mp4" width="100%" style="border-radius:10px; max-height: 100%;"></video>
-            </div>
-            <div class="column">
-            <div class="pb-2 is-size-6">DDPO</div>
-                <video class="center" playsinline autoplay loop muted src="videos/hps_ood/ddpo_6_4.mp4" width="100%" style="border-radius:10px; max-height: 100%;"></video>
-            </div>
-            <div class="column">
-            <div class="pb-2 is-size-6">DPO</div>
-                <video class="center" playsinline autoplay loop muted src="videos/hps_ood/dpo_6_4.mp4" width="100%" style="border-radius:10px; max-height: 100%;"></video>
-            </div> 
-          </div>
-          
-          
-      
-      <div style="text-align: center; padding-top: 20px;"> 
-        <h2 class="title has-text-centered is-size-4" style="background-color: #f2f2f2; padding: 10px; border-radius: 5px; display: inline-block;">
-          <a href="hps_ood.html" style="text-decoration: none; color: blue;">Click here for More Results</a>
-        </h2>
+        <!-- Add more carousel items as needed -->
       </div>
+      <div class="d-flex justify-content-center">
+        <ol class="carousel-indicators">
+          <li data-target="#videoCarouselIndicators" data-slide-to="0" class="active"></li>
+          <li data-target="#videoCarouselIndicators" data-slide-to="1"></li>
+          <li data-target="#videoCarouselIndicators" data-slide-to="2"></li>
+        </ol>
+      </div>
+    </div>
+    
 
-</div>
-</td>
-</tr>
-</div> 
-</div>
-</div>
-</section>
+
+
+
+  <!-- HPS section -->
+  <!-- ######################## -->
+  <!-- Aesthetic and HPS section -->
+  <div class="container">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h3 class="title pt-5 pb-2 has-text-centered" style="text-align: center; padding-bottom: 10px;">
+            <strong>HPS Reward</strong>
+          </h3>
+        </div>
+      </div>
+    </div>
+    <div id="videoCarouselIndicators2" class="carousel slide" data-ride="carousel" data-interval="5000">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="d-flex justify-content-center video-wrapper">
+            <div class="video-container">
+              <video class="d-block w-100" autoplay muted loop>
+                <source src="videos/row5/15_1_0001.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="video-container">
+              <video class="d-block w-100" autoplay muted loop>
+                <source src="videos/row5/13_0_0001.mp4" type="video/mp4">
+              </video>
+            </div>
+            <a class="carousel-control-prev" href="#videoCarouselIndicators2" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#videoCarouselIndicators2" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+          <div class="carousel-caption">
+            Caption for video 1
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="d-flex justify-content-center video-wrapper">
+            <div class="video-container">
+              <video class="d-block w-100" autoplay muted loop>
+                <source src="videos/row5/3_1_0002.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="video-container">
+              <video class="d-block w-100" autoplay muted loop>
+                <source src="videos/row5/7_0_0003.mp4" type="video/mp4">
+              </video>
+            </div>
+            <a class="carousel-control-prev" href="#videoCarouselIndicators2" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#videoCarouselIndicators2" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+          <div class="carousel-caption">
+            Caption for video 2
+          </div>
+        </div>
+        <!-- Add more carousel items as needed -->
+      </div>
+      <div class="d-flex justify-content-center">
+        <ol class="carousel-indicators">
+          <li data-target="#videoCarouselIndicators2" data-slide-to="0" class="active"></li>
+          <li data-target="#videoCarouselIndicators2" data-slide-to="1"></li>
+          <li data-target="#videoCarouselIndicators2" data-slide-to="2"></li>
+        </ol>
+      </div>
+    </div>
+
+
+  <!-- PickScore section -->
+  <!-- ######################## -->
+  <!-- Aesthetic and HPS section -->
+  <div class="container">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h3 class="title pt-5 pb-2 has-text-centered" style="text-align: center; padding-bottom: 10px;">
+            <strong>PickScore Reward</strong>
+          </h3>
+        </div>
+      </div>
+    </div>
+    <div id="videoCarouselIndicators3" class="carousel slide" data-ride="carousel" data-interval="5000">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="d-flex justify-content-center video-wrapper">
+            <div class="video-container">
+              <video class="d-block w-100" autoplay muted loop>
+                <source src="videos/row5/15_1_0001.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="video-container">
+              <video class="d-block w-100" autoplay muted loop>
+                <source src="videos/row5/13_0_0001.mp4" type="video/mp4">
+              </video>
+            </div>
+            <a class="carousel-control-prev" href="#videoCarouselIndicators3" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#videoCarouselIndicators3" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+          <div class="carousel-caption">
+            Caption for video 1
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="d-flex justify-content-center video-wrapper">
+            <div class="video-container">
+              <video class="d-block w-100" autoplay muted loop>
+                <source src="videos/row5/3_1_0002.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="video-container">
+              <video class="d-block w-100" autoplay muted loop>
+                <source src="videos/row5/7_0_0003.mp4" type="video/mp4">
+              </video>
+            </div>
+            <a class="carousel-control-prev" href="#videoCarouselIndicators3" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#videoCarouselIndicators3" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+          <div class="carousel-caption">
+            Caption for video 2
+          </div>
+        </div>
+        <!-- Add more carousel items as needed -->
+      </div>
+      <div class="d-flex justify-content-center">
+        <ol class="carousel-indicators">
+          <li data-target="#videoCarouselIndicators3" data-slide-to="0" class="active"></li>
+          <li data-target="#videoCarouselIndicators3" data-slide-to="1"></li>
+          <li data-target="#videoCarouselIndicators3" data-slide-to="2"></li>
+        </ol>
+      </div>
+  </div>
+  <!-- end of PickScore section -->
+
+
 
 <footer class="footer">
   <div class="container">
@@ -645,6 +538,9 @@
   </div>
 </footer>
 
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
 

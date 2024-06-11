@@ -211,7 +211,7 @@ body {
   perspective: 1000px; /* 为 3D 翻转效果设置透视 */
   width: 100%; /* 占据全部可用宽度 */
   height: 0; /* 初始高度设为 0 */
-  padding-top: 100%; /* 对于 16:9 的图像，高度是宽度的 56.25% */
+  padding-top: 80%; /* 对于 16:9 的图像，高度是宽度的 56.25% */
   position: relative;
 }
 

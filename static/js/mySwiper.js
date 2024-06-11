@@ -27,4 +27,4 @@ document.addEventListener('DOMContentLoaded', () => {
     // 开始自动翻转
     setTimeout(flipRandomImage, flipInterval);
   });
-  
+
