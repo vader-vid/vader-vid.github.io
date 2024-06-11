@@ -83,6 +83,19 @@
     margin: 0; /* Remove any margin */
     padding: 0; /* Remove any padding */
   }
+  .text-box {
+    position: absolute;
+    top: 0; /* Adjust position above the video wrapper */
+    left: 0; /* Position it in the left upper corner */
+    /* background-color: black; */
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1; /* Ensure it stays above other elements */
+    font-size: 12px;
+}
+
 
   </style>
 </head>
@@ -308,16 +321,19 @@
     </div>
     <div id="videoCarouselIndicators" class="carousel slide" data-ride="carousel" data-interval="5000">
       <div class="carousel-inner">
+        <!-- video 1 -->
         <div class="carousel-item active">
           <div class="d-flex justify-content-center video-wrapper">
             <div class="video-container">
+              <div class="text-box">Vanilla</div>
               <video class="d-block w-100" autoplay muted loop>
-                <source src="videos/row5/15_1_0001.mp4" type="video/mp4">
+                <source src="videos/aesthetic_hps/origin/2_0_0004.mp4" type="video/mp4">
               </video>
             </div>
             <div class="video-container">
+              <div class="text-box">Ours</div>
               <video class="d-block w-100" autoplay muted loop>
-                <source src="videos/row5/13_0_0001.mp4" type="video/mp4">
+                <source src="videos/aesthetic_hps/vader/2_0_0004.mp4" type="video/mp4">
               </video>
             </div>
             <a class="carousel-control-prev" href="#videoCarouselIndicators" role="button" data-slide="prev">
@@ -330,19 +346,22 @@
             </a>
           </div>
           <div class="carousel-caption">
-            Caption for video 1
+            A person singing on a stage with twinkling lights and a dreamy backdrop.
           </div>
         </div>
+        <!-- video 2 -->
         <div class="carousel-item">
           <div class="d-flex justify-content-center video-wrapper">
             <div class="video-container">
+              <div class="text-box">Vanilla</div>
               <video class="d-block w-100" autoplay muted loop>
-                <source src="videos/row5/3_1_0002.mp4" type="video/mp4">
+                <source src="videos/aesthetic_hps/origin/17_1_0001.mp4" type="video/mp4">
               </video>
             </div>
             <div class="video-container">
+              <div class="text-box">Ours</div>
               <video class="d-block w-100" autoplay muted loop>
-                <source src="videos/row5/7_0_0003.mp4" type="video/mp4">
+                <source src="videos/aesthetic_hps/vader/17_1_0001.mp4" type="video/mp4">
               </video>
             </div>
             <a class="carousel-control-prev" href="#videoCarouselIndicators" role="button" data-slide="prev">
@@ -355,7 +374,35 @@
             </a>
           </div>
           <div class="carousel-caption">
-            Caption for video 2
+            The dog is wearing a green shirt and digging a hole.
+          </div>
+        </div>
+        <!-- video 3 -->
+        <div class="carousel-item">
+          <div class="d-flex justify-content-center video-wrapper">
+            <div class="video-container">
+              <div class="text-box">Vanilla</div>
+              <video class="d-block w-100" autoplay muted loop>
+                <source src="videos/aesthetic_hps/origin/1_0_0001.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="video-container">
+              <div class="text-box">Ours</div>
+              <video class="d-block w-100" autoplay muted loop>
+                <source src="videos/aesthetic_hps/vader/1_0_0001.mp4" type="video/mp4">
+              </video>
+            </div>
+            <a class="carousel-control-prev" href="#videoCarouselIndicators" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#videoCarouselIndicators" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+          <div class="carousel-caption">
+            A person playing a guitar by a campfire under a starry sky.
           </div>
         </div>
         <!-- Add more carousel items as needed -->
@@ -391,11 +438,13 @@
         <div class="carousel-item active">
           <div class="d-flex justify-content-center video-wrapper">
             <div class="video-container">
+              <div class="text-box">Vanilla</div>
               <video class="d-block w-100" autoplay muted loop>
                 <source src="videos/row5/15_1_0001.mp4" type="video/mp4">
               </video>
             </div>
             <div class="video-container">
+              <div class="text-box">Ours</div>
               <video class="d-block w-100" autoplay muted loop>
                 <source src="videos/row5/13_0_0001.mp4" type="video/mp4">
               </video>
@@ -416,11 +465,13 @@
         <div class="carousel-item">
           <div class="d-flex justify-content-center video-wrapper">
             <div class="video-container">
+              <div class="text-box">Vanilla</div>
               <video class="d-block w-100" autoplay muted loop>
                 <source src="videos/row5/3_1_0002.mp4" type="video/mp4">
               </video>
             </div>
             <div class="video-container">
+              <div class="text-box">Ours</div>
               <video class="d-block w-100" autoplay muted loop>
                 <source src="videos/row5/7_0_0003.mp4" type="video/mp4">
               </video>
@@ -468,11 +519,13 @@
         <div class="carousel-item active">
           <div class="d-flex justify-content-center video-wrapper">
             <div class="video-container">
+              <div class="text-box">Vanilla</div>
               <video class="d-block w-100" autoplay muted loop>
                 <source src="videos/row5/15_1_0001.mp4" type="video/mp4">
               </video>
             </div>
             <div class="video-container">
+              <div class="text-box">Ours</div>
               <video class="d-block w-100" autoplay muted loop>
                 <source src="videos/row5/13_0_0001.mp4" type="video/mp4">
               </video>
@@ -492,12 +545,14 @@
         </div>
         <div class="carousel-item">
           <div class="d-flex justify-content-center video-wrapper">
+            <div class="text-box">Vanilla</div>
             <div class="video-container">
               <video class="d-block w-100" autoplay muted loop>
                 <source src="videos/row5/3_1_0002.mp4" type="video/mp4">
               </video>
             </div>
             <div class="video-container">
+              <div class="text-box">Ours</div>
               <video class="d-block w-100" autoplay muted loop>
                 <source src="videos/row5/7_0_0003.mp4" type="video/mp4">
               </video>
