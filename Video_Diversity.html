@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+  <title>Paginated Video Gallery</title>
+
+  <style>
+    .pagination-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    .pagination .button {
+      margin: 0 5px;
+    }
+
+    .video-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .video-grid-item {
+      width: 9%;
+      margin: 5px;
+      text-align: center;
+    }
+
+    .video-title {
+      font-size: 0.8rem;
+      margin-top: 10px;
+    }
+
+    .category-title {
+      font-size: 1.5rem;
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .prompt-title {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <h3 class="title pt-5 pb-2 has-text-centered" style="text-align: center; padding-bottom: 10px;">
+    <b>Diversity Testing</b>
+  </h3>
+
+  <p class="subtitle has-text-centered" style="text-align: center; padding: 0 20px; color: gray; font-family: 'Arial', sans-serif;">
+    This gallery showcases images generated from prompts that are out of the model's training distribution.
+  </p>
+
+  <!-- Display Prompt -->
+  <div id="promptTitle" class="prompt-title"></div>
+
+  <div id="videoContainer" class="container"></div>
+  <div id="paginationWrapper" class="pagination-wrapper">
+    <div id="pagination" class="pagination is-centered"></div>
+  </div>
+
+  <script>
+    const prompts = [
+      "A fairy tends to enchanted, glowing flowers.",
+      "A brown dog eagerly eats from a bowl in a kitchen.",
+      "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+    ];
+
+    const videoDatas = [
+    [
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_0.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_0.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_0.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_1.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_1.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_1.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_10.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_10.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_10.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_100.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_100.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_100.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_102.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_102.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_102.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_103.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_103.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_103.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_104.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_104.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_104.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_105.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_105.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_105.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_106.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_106.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_106.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_107.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_107.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_107.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_108.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_108.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_108.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_109.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_109.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_109.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_11.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_11.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_11.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_110.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_110.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_110.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_111.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_111.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_111.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_112.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_112.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_112.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_113.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_113.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_113.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_114.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_114.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_114.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_115.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_115.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_115.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_116.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_116.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_116.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_117.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_117.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_117.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_118.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_118.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_118.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_119.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_119.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_119.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_12.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_12.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_12.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_120.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_120.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_120.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_121.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_121.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_121.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_122.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_122.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_122.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_123.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_123.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_123.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_124.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_124.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_124.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_125.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_125.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_125.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_126.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_126.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_126.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_127.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_127.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_127.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_128.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_128.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_128.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_129.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_129.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_129.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_13.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_13.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_13.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_130.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_130.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_130.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_131.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_131.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_131.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_132.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_132.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_132.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_133.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_133.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_133.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_134.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_134.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_134.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_135.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_135.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_135.mp4"
+    },
+    {
+        "caption": "A fairy tends to enchanted, glowing flowers.",
+        "aestheticPath": "videos/flower_a_hps/compressed_136.mp4",
+        "pickscorePath": "videos/flower_pick/compressed_136.mp4",
+        "videocrafterPath": "videos/flower_origin/compressed_136.mp4"
+    },
+],
+    
+    [
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_0.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_0.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_0.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_1.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_1.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_1.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_10.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_10.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_10.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_100.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_100.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_100.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_101.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_101.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_101.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_102.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_102.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_102.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_103.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_103.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_103.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_104.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_104.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_104.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_105.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_105.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_105.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_106.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_106.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_106.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_107.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_107.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_107.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_108.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_108.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_108.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_109.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_109.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_109.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_11.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_11.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_11.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_110.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_110.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_110.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_111.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_111.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_111.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_112.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_112.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_112.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_113.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_113.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_113.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_114.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_114.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_114.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_115.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_115.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_115.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_116.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_116.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_116.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_117.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_117.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_117.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_118.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_118.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_118.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_119.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_119.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_119.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_12.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_12.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_12.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_120.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_120.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_120.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_121.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_121.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_121.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_122.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_122.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_122.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_123.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_123.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_123.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_124.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_124.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_124.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_125.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_125.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_125.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_126.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_126.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_126.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_127.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_127.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_127.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_128.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_128.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_128.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_129.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_129.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_129.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_13.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_13.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_13.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_130.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_130.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_130.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_131.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_131.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_131.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_132.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_132.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_132.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_133.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_133.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_133.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_134.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_134.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_134.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_135.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_135.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_135.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_136.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_136.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_136.mp4"
+        },
+        {
+            "caption": "A brown dog eagerly eats from a bowl in a kitchen.",
+            "aestheticPath": "videos/dog_a_hps/compressed_137.mp4",
+            "pickscorePath": "videos/dog_pick/compressed_137.mp4",
+            "videocrafterPath": "videos/dog_origin/compressed_137.mp4"
+        },
+      ],
+      
+[
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_0.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_0.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_0.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_1.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_1.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_1.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_10.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_10.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_10.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_100.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_100.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_100.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_102.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_102.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_102.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_106.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_106.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_106.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_107.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_107.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_107.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_11.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_11.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_11.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_110.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_110.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_110.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_111.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_111.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_111.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_112.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_112.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_112.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_113.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_113.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_113.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_114.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_114.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_114.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_116.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_116.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_116.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_117.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_117.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_117.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_118.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_118.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_118.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_119.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_119.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_119.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_12.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_12.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_12.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_120.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_120.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_120.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_121.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_121.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_121.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_122.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_122.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_122.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_123.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_123.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_123.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_124.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_124.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_124.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_125.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_125.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_125.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_126.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_126.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_126.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_127.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_127.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_127.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_128.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_128.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_128.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_129.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_129.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_129.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_13.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_13.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_13.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_130.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_130.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_130.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_131.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_131.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_131.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_132.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_132.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_132.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_133.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_133.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_133.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_134.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_134.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_134.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_135.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_135.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_135.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_136.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_136.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_136.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_137.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_137.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_137.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_138.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_138.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_138.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_139.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_139.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_139.mp4"
+    },
+    {
+        "caption": "A lion is majestically standing on a rocky outcrop, surveying its territory with the golden light of dawn casting a regal glow on its mane.",
+        "aestheticPath": "videos/lion_a_hps/compressed_140.mp4",
+        "pickscorePath": "videos/lion_pick/compressed_140.mp4",
+        "videocrafterPath": "videos/lion_origin/compressed_140.mp4"
+    },
+
+],
+    ];
+
+    const VIDEOS_PER_CATEGORY = 30;
+
+    function renderCategoryVideos(categoryVideos, title) {
+      const container = document.createElement("div");
+
+      const categoryTitle = document.createElement("h2");
+      categoryTitle.className = "category-title";
+      categoryTitle.textContent = title;
+
+      const gridContainer = document.createElement("div");
+      gridContainer.className = "video-grid";
+
+      categoryVideos.forEach(video => {
+        const videoItem = document.createElement("div");
+        videoItem.className = "video-grid-item";
+
+        videoItem.innerHTML = `
+          <video playsinline autoplay loop muted src="${video}" 
+                 style="border-radius:10px; width:100%; max-height: 100px;"></video>
+        `;
+
+        gridContainer.appendChild(videoItem);
+      });
+
+      container.appendChild(categoryTitle);
+      container.appendChild(gridContainer);
+
+      return container;
+    }
+
+    function renderVideos(videoData, page = 1) {
+      const container = document.getElementById("videoContainer");
+      container.innerHTML = "";
+
+      // Divide videos into categories
+      const videocrafterVideos = videoData.map(v => v.videocrafterPath).slice((page - 1) * VIDEOS_PER_CATEGORY, page * VIDEOS_PER_CATEGORY);
+      const aestheticVideos = videoData.map(v => v.aestheticPath).slice((page - 1) * VIDEOS_PER_CATEGORY, page * VIDEOS_PER_CATEGORY);
+      const pickscoreVideos = videoData.map(v => v.pickscorePath).slice((page - 1) * VIDEOS_PER_CATEGORY, page * VIDEOS_PER_CATEGORY);
+      
+
+      // Render each category
+      container.appendChild(renderCategoryVideos(videocrafterVideos, "VideoCrafter"));
+      container.appendChild(renderCategoryVideos(aestheticVideos, "VADER: Aesthetic and HPS Reward (Ours)"));
+      container.appendChild(renderCategoryVideos(pickscoreVideos, "VADER: PickScore Reward (Ours)"));
+      
+    }
+
+    function renderPagination(videoDatas, currentPage = 1) {
+      const paginationContainer = document.getElementById("pagination");
+      paginationContainer.innerHTML = "";
+
+      const totalPages = videoDatas.length;
+
+      // Create pagination buttons
+      for (let i = 1; i <= totalPages; i++) {
+        const button = document.createElement("button");
+        button.className = `button ${i === currentPage ? "is-primary" : ""}`;
+        button.innerText = i;
+
+        button.addEventListener("click", () => {
+          renderPrompt(prompts[i - 1]);
+          renderVideos(videoDatas[i - 1], 1);
+          renderPagination(videoDatas, i);
+        });
+
+        paginationContainer.appendChild(button);
+      }
+    }
+
+    function renderPrompt(prompt) {
+      const promptTitle = document.getElementById("promptTitle");
+      promptTitle.textContent = `Prompt: "${prompt}"`;
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderPrompt(prompts[0]);
+      renderVideos(videoDatas[0], 1);
+      renderPagination(videoDatas, 1);
+    });
+  </script>
+</body>
+
+</html>
