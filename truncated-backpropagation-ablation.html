@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>VADER: Video Diffusion Alignment via Reward Gradient</title>
+
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/mySwiper.js"></script>
+  <script src="./static/js/index.js"></script>
+
+  <link rel="icon" href="./favicon.ico?">
+
+
+
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <meta property="og:image:width" content="1600" />
+  <meta property="og:image:height" content="900" />
+
+  <style>
+    .carousel-control-prev,
+    .carousel-control-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 5%;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      /* Ensure the buttons take the full height of the container */
+    }
+
+    .video-wrapper {
+      display: flex;
+      justify-content: center;
+      /* Center the video containers horizontally */
+      align-items: center;
+      /* Center the video containers vertically */
+      position: relative;
+      width: 70%;
+      /* Adjust the width to make the whole container smaller */
+      margin: auto;
+      /* Center the container */
+      gap: 1%;
+      /* Adjust the gap between videos */
+      border: none;
+      /* Remove any border */
+      padding: 0;
+      /* Remove any padding */
+      background: none;
+      /* Remove any background */
+    }
+
+    .video-container {
+      position: relative;
+      width: 50%;
+      /* Adjust the width of each video container */
+      overflow: hidden;
+      /* Ensure the video doesn't overflow the container */
+      border-radius: 10px;
+      /* Apply rounded corners */
+    }
+
+    .video-container video {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      /* Ensure the video itself has rounded corners */
+      border: 1px solid #ccc;
+      /* Add a border around the video */
+    }
+
+    .carousel-caption {
+      position: relative;
+      left: 0;
+      color: black;
+      margin-top: 10px;
+      /* Adjust margin as needed */
+      text-align: center;
+    }
+
+    .carousel-inner {
+      overflow: hidden;
+      /* Ensure no overflow is visible during transitions */
+      margin: 0;
+      /* Remove any margin */
+      padding: 0;
+      /* Remove any padding */
+    }
+
+    .text-box {
+      position: absolute;
+      top: 0;
+      /* Adjust position above the video wrapper */
+      left: 0;
+      /* Position it in the left upper corner */
+      /* background-color: black; */
+      color: white;
+      padding: 5px 10px;
+      border-radius: 10px;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      /* Ensure it stays above other elements */
+      font-size: 12px;
+
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .button-container a {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 20px;
+      border-radius: 30px;
+      border: 1px solid #ccc;
+      text-decoration: none;
+      color: #333;
+      font-size: 16px;
+    }
+
+    .button-container a i {
+      margin-right: 8px;
+    }
+
+
+    .table-container {
+      width: 80%;
+      /* Adjust table width to not occupy the full screen */
+      margin: 20px auto;
+      /* Center the table */
+      border: 1px solid #ddd;
+      /* Add outer border */
+      border-radius: 8px;
+      /* Round the corners */
+      overflow: hidden;
+      /* Fix border overflow */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      /* Add shadow */
+      margin-top: -20px;
+      /* If the table is too far away, reduce the spacing */
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      text-align: center;
+      padding: 8px;
+    }
+
+    th {
+      background-color: #f4f4f4;
+      font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+  </style>
+</head>
+
+<body>
+  <section class="hero">
+    <div class="hero-body no-bottom-padding">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">Truncated Backpropagation Ablation</h1>
+
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ######################## -->
+  <!--Truncated Backpropagation Ablation-->
+  <div class="container"
+    style="background-color: #fffefe; padding: 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <!-- <h3 id="truncated-backpropagation-ablation" class="title pt-5 pb-2 has-text-centered"
+          style="text-align: center; padding-bottom: 10px;">
+          <strong>Truncated Backpropagation Ablation</strong>
+        </h3> -->
+      </div>
+    </div>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th style="text-align: center;">Training Step</th>
+            <th style="text-align: center;">Reward Value (k=1)</th>
+            <th style="text-align: center;">Reward Value (k=10)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="text-align: center;">1</td>
+            <td style="text-align: center;">5.047</td>
+            <td style="text-align: center;">5.0946</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;">100</td>
+            <td style="text-align: center;">5.3342</td>
+            <td style="text-align: center;">5.2523</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;">200</td>
+            <td style="text-align: center;">5.4977</td>
+            <td style="text-align: center;">5.2072</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;">300</td>
+            <td style="text-align: center;"><b>5.6479</b></td>
+            <td style="text-align: center;">5.1906</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="subtitle has-text-centered"
+      style="text-align: center; padding-bottom: 0px; color: black; font-family: 'Google Sans', sans-serif;">
+      From left to right, we demenstrate videos for training steps 1, 100, 200, and 300.
+    </p>
+    <!-- Image Section -->
+    <div class="columns is-centered"
+      style="flex-direction: column; align-items: center; gap: 20px; width: 80%; margin: auto;">
+
+      <!-- k=1 -->
+      <div class="video-container" style="width: 100%; text-align: center;">
+        <div class="text-box"
+          style="margin-bottom: 10px; font-size: 1em; font-weight: bold; display: inline-block; color: white; padding: 5px 10px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7); background-color: #000000;">
+          k=1
+        </div>
+        <img class="d-block w-100" src="videos/truncated/k1.gif" alt="k=1"
+          style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+      </div>
+      <!-- k=10 -->
+      <div class="video-container" style="width: 100%; text-align: center;">
+        <div class="text-box"
+          style="margin-bottom: 10px; font-size: 1em; font-weight: bold; display: inline-block; color: white; padding: 5px 10px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7); background-color: #000000;">
+          k=10
+        </div>
+        <img class="d-block w-100" src="videos/truncated/k10.gif" alt="k=10"
+          style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+        <div class="carousel-caption">
+          A rabbit hitting the drums with its paws in a garden with blooming flowers.
+        </div>
+      </div>
+    </div>
+
+    <!-- Updated text section -->
+    <div class="columns is-centered">
+      <p class="subtitle"
+        style="width: 80%; text-align: justify; text-justify: inter-word; padding: 10px 20px; color: black; font-family: 'Google Sans', sans-serif; line-height: 1.8; font-size: 1rem;">
+        We ablate the number of truncated backpropagation steps (K) in VADER. For this experiment,
+        we use VADER trained using Aesthetic and HPS Rewards. The base model is VideoCrafter2. We find that higher
+        values of K result in
+        more semantic level changes, while K=1 results in more fine-grained changes, specifically in
+        the earlier steps of training. Further, we find as we train longer, both the models start
+        exhibiting semantic level changes. We also find it is easier to optimize with a smaller value of
+        K, as can be seen in the results below.
+      </p>
+    </div>
+
+  </div>
+  <!-- end of truncated section -->
+
+
+
+
+
+
+
+
+
+
+  <!-- ######################## -->
+  <!-- <div class="container"
+    style="text-align: center; padding-bottom: 8em; background-color: #f7f9fc; padding: 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h3 id="video-gallery" class="title pt-5 pb-2 has-text-centered"
+          style="text-align: center; padding-bottom: 10px;">
+          <strong>Video Gallery</strong>
+        </h3>
+        <p class="subtitle has-text-centered"
+          style="text-align: center; padding-bottom: 10px; color: black; font-family: 'Google Sans', sans-serif;">
+          More Videos from VADER are exhibited in <a href="./Video_Gallery.html">Video Gallery</a>.
+        </p>
+      </div>
+    </div>
+  </div> -->
+
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
